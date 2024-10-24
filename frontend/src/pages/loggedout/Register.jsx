@@ -1,26 +1,13 @@
-import React, { useState } from 'react'
-import RegisterStudent from '../../components/signups/RegisterStudent'
-import RegisterAlumnus from '../../components/signups/RegisterAlumnus'
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import React, { useState } from 'react';
+import RegisterStudent from '../../components/signups/RegisterStudent';
+import RegisterAlumnus from '../../components/signups/RegisterAlumnus';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-
-import login from '../../images/login.jpg'
+import login from '../../images/login.jpg';
 import { Container, Paper } from '@mui/material';
+
 const Register = () => {
-
-    const [user, setUser] = useState('alumnus')
-
-    const setStudent = (e) => {
-        setUser('student')
-    }
-
-    const setAlumnus = (e) => {
-        setUser('alumnus')
-    }
-
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -36,39 +23,41 @@ const Register = () => {
                     alt="bg"
                     style={{
                         width: '100%',
-                        minHeight: '100%',
-                        minWidth: '100%',
+                        height: '100vh', // Ensure the image covers the full viewport height
                         objectFit: 'cover',
-                        margin: '-12.5vh 0', // Apply negative margin to crop the image beyond the height
-                    }} />
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: 0, // Background image lower z-index
+                    }} 
+                />
             </div>
-            {/* <Container component="main" maxWidth="xs"> */}
             <Container
                 component="main"
                 maxWidth="xs"
                 sx={{
                     position: 'absolute',
-                    top: '54%',
+                    top: '70%', // Increased from 60% to 70% to push the content further down
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
+                    zIndex: 1, // Higher z-index to ensure visibility above the background
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Optional: Background for better visibility
+                    borderRadius: 2, // Optional: Add border radius
+                    padding: 2, // Optional: Add padding
                 }}
             >
-                {/* <Paper sx={{ p: 0 }} elevation={0} square> */}
-                <Box sx={{ width: '100%', }}>
-                    <Paper sx={{  alignContent: 'center', alignItems: 'center' }}>
+                <Box sx={{ width: '100%' }}>
+                    <Paper sx={{ padding: 2 }}>
                         <Tabs value={value} onChange={handleChange} centered>
-                            <Tab label="Sign Up as Alumnus" onClick={setAlumnus} />
-                            <Tab label="Sign Up as Student" onClick={setStudent} />
+                            <Tab label="Sign Up as Alumnus" />
+                            <Tab label="Sign Up as Student" />
                         </Tabs>
                     </Paper>
-                    {user === 'student' ? <RegisterStudent /> : <RegisterAlumnus />}
+                    {value === 0 ? <RegisterAlumnus /> : <RegisterStudent />}
                 </Box>
-                {/* </Paper> */}
-
             </Container>
-
-        </div >
-    )
+        </div>
+    );
 }
 
-export default Register
+export default Register;

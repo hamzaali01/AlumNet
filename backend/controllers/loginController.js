@@ -7,7 +7,7 @@ const login = async (req, res) => {
 
     const id = req.body.id
     const password = req.body.password
-    JWT_KEY = "supersecret_dont_share";
+    JWT_KEY = process.env.JWT_KEY;
 
     try {
 
@@ -15,7 +15,6 @@ const login = async (req, res) => {
 
         let result = await request
             .query(`SELECT password,user_id,status FROM login_cred where id=${id}`)
-
         if (result.recordset[0] == null) {
             res.status(400).json({ message: "Incorrect login credentials" })
         }

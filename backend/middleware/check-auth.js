@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
 
-  JWT_KEY = "supersecret_dont_share";
+  JWT_KEY = process.env.JWT_KEY;
 
   if (req.method === "OPTIONS") {
     return next();

@@ -7,7 +7,7 @@ const authPermission = (permission) => {
             return next();
         }
         try {
-            JWT_KEY = "supersecret_dont_share"
+            JWT_KEY = process.env.JWT_KEY
             const token = req.headers.authorization.split(" ")[1];
             const decodedToken = jwt.verify(token, JWT_KEY);
             // req.userData = { userERP: decodedToken.ERP, userName: decodedToken.name, userRole: decodedToken.userRole };
